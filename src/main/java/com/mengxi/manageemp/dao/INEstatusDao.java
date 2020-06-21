@@ -12,6 +12,9 @@ public interface INEstatusDao {
     @Delete("delete from NEstatus where neid = #{neid} and status_name = #{status_name}")
     public void deleteStatus(int neid,String status_name);
 
+    @Delete("delete from NEstatus where neid = #{neid}")
+    int deleteSTatusByNeid(int neid);
+
     @Insert("insert NEstatus(neid,status_name,date,site,remark) values(#{neid},#{status_name},#{date},#{site},#{remark})")
     @SelectKey(keyColumn="neid",keyProperty="neid",resultType=Integer.class,before =
             false, statement = { "select last_insert_id()" })

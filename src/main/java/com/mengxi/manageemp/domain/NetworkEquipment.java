@@ -1,5 +1,7 @@
 package com.mengxi.manageemp.domain;
 
+import java.util.Date;
+
 public class NetworkEquipment {
     private int neid;
     private  String uuid;
@@ -9,7 +11,7 @@ public class NetworkEquipment {
     private String tid;
     private String NE_type;
     private String unitType;
-    private String stock_date;
+    private Date stock_date;
     private String remark;
     private NEstatus NEstatus;
     public int getNeid() {
@@ -76,13 +78,14 @@ public class NetworkEquipment {
         this.unitType = unitType;
     }
 
-    public String getStock_date() {
+    public Date getStock_date() {
         return stock_date;
     }
 
-    public void setStock_date(String stock_date) {
+    public void setStock_date(Date stock_date) {
         this.stock_date = stock_date;
     }
+
     public String getRemark() {
         return remark;
     }

@@ -2,6 +2,7 @@ package com.mengxi.manageemp;
 
 import com.mengxi.manageemp.dao.INEstatusDao;
 import com.mengxi.manageemp.dao.INEstatus_typeDao;
+import com.mengxi.manageemp.dao.INEtypeDao;
 import com.mengxi.manageemp.dao.INetworkEquipmentDao;
 import com.mengxi.manageemp.domain.NEstatus;
 import com.mengxi.manageemp.domain.NEstatus_type;
@@ -28,7 +29,8 @@ class ManageempApplicationTests {
     @Autowired
     private NEService neService;
 
-
+    @Autowired
+    private INEtypeDao inEtypeDao;
     @Test
     void contextLoads() {
 //        List<NEstatus_type> nEstatus_types = inEstatus_typeDao.findAll();
@@ -57,6 +59,10 @@ class ManageempApplicationTests {
         nEstatus.setStatus_name("putaway1");
         int tag = inEstatusDao.updateStatus(nEstatus);
         System.out.print("tag:"+tag);
+    }
+    @Test
+    void testNEtype(){
+        System.out.print(inEtypeDao.findAll());
     }
 
 }

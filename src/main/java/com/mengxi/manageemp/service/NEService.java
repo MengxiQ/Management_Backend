@@ -17,30 +17,38 @@ public class NEService implements INEService {
 
     @Autowired
     private INEstatusDao inEstatusDao;
+
     @Autowired
     private INEstatus_typeDao inEstatus_typeDao;
+
     public List<NetworkEquipment> getAll(){
-        //当没有状态时，添加默认状态，防止返回的nestatus对象为null
         List<NetworkEquipment> networkEquipments = iNetworkEquipmentDao.findAll();
-//        for (NetworkEquipment networkEquipment : networkEquipments){
-//            if (networkEquipment.getNEstatus() == null){
-//                NEstatus nEstatus = new NEstatus();
-//                nEstatus.setNeid(networkEquipment.getNeid());
-//                nEstatus.setStatus_name("default");
-//                nEstatus.setRemark("null");
-//                nEstatus.setSite("null");
-//                networkEquipment.setNEstatus(nEstatus);
-//            }
-//
-//        }
         return networkEquipments;
     }
-//    对添加的的新设备状态进行处理
-    public void addStatus(int neid,String status_name){
-        NEstatus nEstatus = new NEstatus();
-        nEstatus.setNeid(neid);
-        nEstatus.setStatus_name(status_name);
-        nEstatus.setDate(new Date());
-        inEstatusDao.addStatus(nEstatus);
+    // 更新设备详细信息
+    public int upateNetworkEquipment(NetworkEquipment networkEquipment){
+        return iNetworkEquipmentDao.upateNetworkEquipment(networkEquipment);
+    }
+    @Override
+    public int deleteNetworkEquipment(int neid) {
+//        1.判断状态类型时候为空，空则直接删除，非空需要先删除状态
+        if(inEstatusDao.findStatusByNeid(neid) == null){
+            System.out.print("The status is null");
+            iNetworkEquipmentDao.deleteNetworkEquipment(neid);
+            return  1;
+        }{
+            //删除状态
+            if (inEstatusDao.deleteSTatusByNeid(neid) == 1 ){
+                iNetworkEquipmentDao.deleteNetworkEquipment(neid);
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+    @Override
+    public int addNetworkEquipment(NetworkEquipment networkEquipment) {
+        return iNetworkEquipmentDao.addNetworkEquipment(networkEquipment);
     }
 }
