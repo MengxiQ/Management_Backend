@@ -34,8 +34,12 @@ public class NEService implements INEService {
 //        1.判断状态类型时候为空，空则直接删除，非空需要先删除状态
         if(inEstatusDao.findStatusByNeid(neid) == null){
             System.out.print("The status is null");
-            iNetworkEquipmentDao.deleteNetworkEquipment(neid);
-            return  1;
+            if(iNetworkEquipmentDao.deleteNetworkEquipment(neid) == 1){
+                return  1;
+            }else {
+                return 0;
+            }
+
         }{
             //删除状态
             if (inEstatusDao.deleteSTatusByNeid(neid) == 1 ){

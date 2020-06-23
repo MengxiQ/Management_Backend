@@ -7,7 +7,9 @@ import com.mengxi.manageemp.domain.NEstatus;
 import com.mengxi.manageemp.domain.NEstatus_type;
 import com.mengxi.manageemp.domain.NEtype;
 import com.mengxi.manageemp.domain.NetworkEquipment;
+import com.mengxi.manageemp.domain.charts.TypeOverview;
 import com.mengxi.manageemp.service.NEService;
+import com.mengxi.manageemp.service.charts.AssetOverviewSerive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +26,8 @@ public class NeConstroller {
     private INEstatusDao inEstatusDao;
     @Autowired
     private INEtypeDao inEtypeDao;
+    @Autowired
+    private AssetOverviewSerive assetOverviewSerive;
 //    获取所有的设备信息
     @RequestMapping(path ="NetEquip",method = RequestMethod.GET)
     public List<NetworkEquipment> finAll(){
@@ -93,6 +97,12 @@ public class NeConstroller {
 //        System.out.print("updateStatus:");
 //        System.out.print(nEstatus);
         return inEstatusDao.updateStatus(nEstatus);
+    }
+
+//    返回网络设备类型对应的数量统计信息
+    @RequestMapping(path = "typeOverview",method = RequestMethod.GET)
+    public List<TypeOverview> typeOverview(){
+        return assetOverviewSerive.typeOverview();
     }
 
 

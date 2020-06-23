@@ -2,7 +2,7 @@ package com.mengxi.manageemp.domain.charts;
 
 public class TypeOverview {
     private String name;
-    private String values;
+    private int value;
 
     public String getName() {
         return name;
@@ -12,19 +12,19 @@ public class TypeOverview {
         this.name = name;
     }
 
-    public String getValues() {
-        return values;
+    public int getValue() {
+        return value;
     }
 
-    public void setValues(String values) {
-        this.values = values;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     @Override
     public String toString() {
         return "TypeOverview{" +
                 "name='" + name + '\'' +
-                ", values='" + values + '\'' +
+                ", value=" + value +
                 '}';
     }
 }
