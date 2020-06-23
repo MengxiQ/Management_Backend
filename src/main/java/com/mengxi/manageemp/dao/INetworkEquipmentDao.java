@@ -1,6 +1,7 @@
 package com.mengxi.manageemp.dao;
 
 import com.mengxi.manageemp.domain.NetworkEquipment;
+import com.mengxi.manageemp.domain.charts.StatusCount;
 import com.mengxi.manageemp.domain.charts.TypeOverview;
 import org.apache.ibatis.annotations.*;
 
@@ -31,7 +32,15 @@ public interface INetworkEquipmentDao {
     @Delete("delete from NetworkEquipment where neid = #{neid}")
     int deleteNetworkEquipment(int neid);
 
+/**
+ * 图表信息
+ * */
+
 //  查询按照列名分组的统计信息, NE_type
     @Select("select NE_type as 'name',COUNT(NE_type) as 'value' from NetworkEquipmentBase GROUP BY NE_type")
     List<TypeOverview> getAssetOverviewByCol();
+
+//  查询按照类型获取所有状态的设备的数量 parm:设备类型
+    @Select("select status,count(status) as count from NetworkEquipmentTypeStatus where NE_type = #{NEtype} GROUP BY status")
+    List<StatusCount> getStatusCountsByNEtype(String NEtype);
 }

@@ -7,6 +7,7 @@ import com.mengxi.manageemp.dao.INetworkEquipmentDao;
 import com.mengxi.manageemp.domain.NEstatus;
 import com.mengxi.manageemp.domain.NEstatus_type;
 import com.mengxi.manageemp.domain.NetworkEquipment;
+import com.mengxi.manageemp.domain.charts.StatusCount;
 import com.mengxi.manageemp.service.NEService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,4 +66,9 @@ class ManageempApplicationTests {
         System.out.print(inEtypeDao.findAll());
     }
 
+    @Test
+    void testGetStatusCountsByNEtype(){
+        List<StatusCount> statusCounts = networkEquipmentDao.getStatusCountsByNEtype("交换机");
+        System.out.println(statusCounts);
+    }
 }
